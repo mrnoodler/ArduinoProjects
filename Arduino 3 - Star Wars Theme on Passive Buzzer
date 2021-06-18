@@ -1,0 +1,73 @@
+//Passive Buzzer - Star Wars
+//by mr_noodler
+//See license
+
+int serial = 8;
+int reset = 1;
+int latch = 4;
+int clk = 2;
+
+int buzzer = 11;
+
+int led[8] = {1, 2, 4, 8, 16, 32, 64, 128};
+
+int notes[8] = {2093, 2349, 2637, 2794, 3136, 3520, 3951, 4186};
+int starWars[59][2] = {{0,750},{8,250},{4,750},{8,200},{3,250},
+                       {2,250},{1,250},{8,250},{7,750},{8,200},
+                       {4,500},{8,500},{3,250},{2,250},{1,250},
+                       {8,250},{7,750},{8,250},{4,500},{8,500},
+                       {3,250},{2,250},{3,250},{8,250},{1,750},
+                       {8,250},{0,250},{0,250},{0,250},{8,250},
+                       {1,750},{8,250},{4,750},{8,250},{3,250},
+                       {2,250},{1,250},{8,250},{7,750},{8,250},
+                       {4,500},{8,500},{3,250},{2,250},{1,250},
+                       {8,250},{7,750},{8,250},{4,500},{8,500},
+                       {3,250},{2,250},{3,250},{8,250},{1,750},
+                       {8,250},{0,250},{0,250},{8,500}};
+
+void setup()
+{
+  pinMode(serial, OUTPUT);
+  pinMode (reset, OUTPUT);
+  pinMode (latch, OUTPUT);
+  pinMode (clk, OUTPUT);
+  pinMode (buzzer, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(reset, LOW);
+  digitalWrite(reset, HIGH);
+
+  delay (1000);
+
+  for (int i = 0; i < 59; i++)
+  {
+    delay(50);
+    int note = starWars[i][0];
+
+    switch (note)
+    {
+      case 0: tone(buzzer, notes[0], starWars[i][1]);
+        break;
+      case 1: tone(buzzer, notes[1], starWars[i][1]);
+        break;
+      case 2: tone(buzzer, notes[2], starWars[i][1]);
+        break;
+      case 3: tone(buzzer, notes[3], starWars[i][1]);
+        break;
+      case 4: tone(buzzer, notes[4], starWars[i][1]);
+        break;
+      case 5: tone(buzzer, notes[5], starWars[i][1]);
+        break;
+      case 6: tone(buzzer, notes[6], starWars[i][1]);
+        break;
+      case 7: tone(buzzer, notes[7], starWars[i][1]);
+        break;
+      default: delay(starWars[i][1]);
+    }
+    digitalWrite(latch, LOW);
+    shiftOut(serial, clk, LSBFIRST, led[note]);
+    digitalWrite(latch, HIGH);
+  }
+}
