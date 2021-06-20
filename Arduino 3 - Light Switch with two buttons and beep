@@ -1,0 +1,106 @@
+// Arduino Project #3 - Push Button Program, switches LED colors and beeps when one of two buttons are pushed
+// by mr_noodler
+// See license for usage details
+
+int ledState = 0;
+int buttonUp    = 7;
+int buttonDown  = 12;
+int blue  = 8;
+int green = 9;
+int red   = 10;
+int speaker = 11;
+
+int buttonUpState = 0;
+int buttonDownState = 0;
+int buttonUpLastState = 0;
+int buttonDownLastState = 0;
+
+void setup()
+{
+  pinMode(red, OUTPUT);
+  pinMode(green, OUTPUT);
+  pinMode(blue, OUTPUT);
+  pinMode(speaker, OUTPUT);
+  pinMode(buttonUp, INPUT);
+  pinMode(buttonDown, INPUT);
+}
+
+void SpeakerBeep()
+{
+  digitalWrite(speaker, HIGH);
+  delay (50);
+  digitalWrite(speaker, LOW);
+}
+
+void loop()
+{
+  buttonUpState = digitalRead(buttonUp);
+  buttonDownState = digitalRead(buttonDown);
+
+  if ( buttonUpState != buttonUpLastState && buttonUpState == HIGH)
+  {
+    ledState++;
+    if (ledState > 7) ledState = 0;
+    SpeakerBeep();
+  }
+  if (buttonDownState != buttonDownLastState && buttonDownState == HIGH)
+  {
+    ledState--;
+    if (ledState < 0) ledState = 7;
+    SpeakerBeep();
+  }
+
+  buttonUpLastState = buttonUpState;
+  buttonDownLastState = buttonDownState;
+
+  switch (ledState)
+  {
+    case 1: //GREEN
+      digitalWrite(red, LOW);
+      digitalWrite(green, HIGH);
+      digitalWrite(blue, LOW);
+      break;
+
+    case 2: //BLUE
+      digitalWrite(red, LOW);
+      digitalWrite(green, LOW);
+      digitalWrite(blue, HIGH);
+      break;
+
+    case 3: //YELLOW
+      digitalWrite(red, HIGH);
+      digitalWrite(green, HIGH);
+      digitalWrite(blue, LOW);
+      break;
+
+    case 4: //MAGENTA
+      digitalWrite(red, HIGH);
+      digitalWrite(green, LOW);
+      digitalWrite(blue, HIGH);
+      break;
+
+    case 5: //CYAN
+      digitalWrite(red, LOW);
+      digitalWrite(green, LOW);
+      digitalWrite(blue, HIGH);
+      break;
+
+    case 6: //WHITE
+      digitalWrite(red, HIGH);
+      digitalWrite(green, HIGH);
+      digitalWrite(blue, HIGH);
+      break;
+
+    case 7: //RED
+      digitalWrite(red, HIGH);
+      digitalWrite(green, LOW);
+      digitalWrite(blue, LOW);
+      break;
+
+    default: //DEFAULT OFF
+      digitalWrite(red, LOW);
+      digitalWrite(green, LOW);
+      digitalWrite(blue, LOW);
+      break;
+  }
+}
