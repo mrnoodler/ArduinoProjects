@@ -1,0 +1,23 @@
+//Tilt Switch
+//by mr_noodler
+//See license for usage details
+
+int tiltSwitch = 8;
+int led = 7;
+
+
+void setup() {
+  pinMode(led, OUTPUT);
+  pinMode(tiltSwitch, INPUT);
+  digitalWrite(tiltSwich, HIGH);
+}
+
+void loop() {
+  int tiltSignal = digitalRead(tiltSwitch);
+  if(tiltSignal == 1){
+    digitalWrite(led, HIGH);
+  }
+  else{
+    digitalWrite(led, LOW);
+  }
+}
