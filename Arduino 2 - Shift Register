@@ -1,0 +1,36 @@
+// Arduino Project #2 - Shift Register
+// by mr_noodler
+// See license for usage
+
+int serialData  = 9;
+int latchClock  = 10;
+int shiftClock  = 11;
+int clearData   = 12;
+
+
+void setup()
+{
+  pinMode(serialData, OUTPUT);
+  pinMode(latchClock, OUTPUT);
+  pinMode(shiftClock, OUTPUT);
+  pinMode(clearData, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  //Clears the shift Register on begin sequence;
+  digitalWrite(clearData, LOW);
+  digitalWrite(clearData, HIGH);
+
+
+    for (int i = 0; i < 256; i++)
+    {
+      digitalWrite(latchClock, LOW);
+      shiftOut(serialData, shiftClock, LSBFIRST, i);
+      digitalWrite(latchClock, HIGH);
+      Serial.print(i);
+      delay(250);
+    }
+}
