@@ -1,0 +1,47 @@
+// Arduino Project #1 - Four Digit - 7 segment display
+// by mr_noodler
+// see license for usage details
+
+#include <TM1637.h>
+
+#define CLK 10
+#define DIO 11
+
+TM1637 tm1637(CLK, DIO);
+
+void setup() 
+{
+  tm1637.init();
+  tm1637.set(2);  //BRIGHT_TYPICAL = 2,BRIGHT_DARKEST = 0,BRIGHTEST = 7;  
+}
+
+void loop() 
+{
+  int numb[4]= {0,0,0,0};
+
+  for (int m=0; m<10; m++)
+  {
+    for (int i=0; i<10; i++)
+    {
+      for (int j=0; j<10; j++)
+      {
+        for (int k=0; k<10; k++)
+        {
+          delay(10);
+          numb[0]++;
+          if (numb[0] == 10) numb[0]=0;
+          tm1637.display(3, numb[0]);
+        }
+        numb[1]++;
+        if (numb[1] == 10) numb[1]=0;
+        tm1637.display(2, numb[1]);
+      }
+      numb[2]++;
+      if (numb[2] == 10) numb[2]=0;
+      tm1637.display(1, numb[2]);
+    }
+    numb[3]++;
+    if (numb[3] == 10) numb[3]=0;
+    tm1637.display(0, numb[3]);  
+  }  
+}
