@@ -1,0 +1,72 @@
+// Arduino Project #0 - 4 Digit Display & Button Pressing
+// by mr_noodler
+// See license for usage details
+
+#include <Adafruit_Keypad.h>
+#include <TM1637.h>
+
+const byte ROWS = 4;
+const byte COLS = 4;
+
+char keys[ROWS][COLS] = {
+  {'0', '1', '2', '3'},
+  {'4', '5', '6', '7'},
+  {'8', '9', 'A', 'B'},
+  {'C', 'D', 'E', 'F'}
+};
+
+byte rowPins[ROWS] = {5, 4, 3, 2};
+byte colPins[COLS] = {6, 7, 8, 9};
+
+Adafruit_Keypad keypad = Adafruit_Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+
+#define CLK 10
+#define DIO 11
+
+TM1637 tm1637(CLK, DIO);
+
+void setup()
+{
+  tm1637.init();
+  tm1637.set(2);
+
+  Serial.begin(9600);
+  keypad.begin();
+}
+
+void loop()
+{
+  keypad.tick();
+
+  while (keypad.available())
+  {
+    keypadEvent e = keypad.read();
+    char d = (char)e.bit.KEY;
+    byte b = e.bit.KEY;                     //ASCII values!!
+
+    Serial.print(d);
+    Serial.print(" ");
+    Serial.println(b);
+
+    byte number = 0x0;
+
+    if ( d == '0') number = 0x0;            //Convert Char to Hex
+    else if ( d == '1') number = 0x1;
+    else if ( d == '2') number = 0x2;
+    else if ( d == '3') number = 0x3;
+    else if ( d == '4') number = 0x4;
+    else if ( d == '5') number = 0x5;
+    else if ( d == '6') number = 0x6;
+    else if ( d == '7') number = 0x7;
+    else if ( d == '8') number = 0x8;
+    else if ( d == '9') number = 0x9;
+    else if ( d == 'A') number = 0xA;
+    else if ( d == 'B') number = 0xB;
+    else if ( d == 'C') number = 0xC;
+    else if ( d == 'D') number = 0xD;
+    else if ( d == 'E') number = 0xE;
+    else number = 0xF;
+
+    tm1637.display(0, number);
+  }
+}
