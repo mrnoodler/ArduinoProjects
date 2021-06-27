@@ -1,0 +1,35 @@
+// Arduino Project #7 - Photoresistor
+// by mr_noodler
+// See license for usage details
+
+int photoResistor = A0;
+int serialData = 2;
+int latchClk = 3;
+int serialClk = 4;
+int reset = 5;
+
+void setup() {
+  pinMode(serialData, OUTPUT);
+  pinMode(serialClk, OUTPUT);
+  pinMode(latchClk, OUTPUT);
+  pinMode(reset, OUTPUT);
+
+  pinMode(photoResistor, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  digitalWrite(reset, LOW);
+  digitalWrite(reset, HIGH);
+  
+  byte photoLevel = (byte)analogRead(photoResistor);
+  
+  Serial.println(photoLevel);
+  digitalWrite(latchClk, LOW);
+  shiftOut(serialData, serialClk, LSBFIRST, photoLevel);
+  digitalWrite(latchClk, HIGH);
+
+  delay(125);
+
+}
