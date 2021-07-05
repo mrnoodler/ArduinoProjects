@@ -1,0 +1,171 @@
+// Arduino Project 9 - 4 Digit 7 Segment Display - The hard way with more Boobies!
+// by mr_noodler
+// See license for usage details
+
+int serialData = 8;
+int latchClock = 7;
+int shiftClock = 6;
+int clearData = 5;
+
+int delayTime = 400;
+
+int values [16] = {252, 96, 218, 242, 102, 182, 190, 224, 254, 246, 238, 62, 156, 122, 222, 142};
+
+void setup()
+{
+  pinMode(serialData, OUTPUT);
+  pinMode(latchClock, OUTPUT);
+  pinMode(shiftClock, OUTPUT);
+  pinMode(clearData, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(clearData, LOW);
+  digitalWrite(clearData, HIGH);
+  
+  Wait();
+  Zero();
+  One();
+  Two();
+  Three();
+  Four();
+  Five();
+  Six();
+  Seven();
+  Eight();
+  Nine();
+  Aa();
+  Bb();
+  Cc();
+  Dd();
+  Ee();
+  Ff();
+
+  // Here are the Boobies!
+  Wait();
+  Bb();
+  Zero();
+  Zero();
+  Bb();
+  One();
+  Ee();
+  Five();
+}
+
+void Wait()
+{
+  delay(delayTime);
+}
+void Zero()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[0] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void One()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[1] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Two()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[2] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Three()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[3] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Four()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[4] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Five()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[5] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Six()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[6] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Seven()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[7] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Eight()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[8] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Nine()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[9] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Aa()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[10] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Bb()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[11] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Cc()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[12] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Dd()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[13] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Ee()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[14] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
+void Ff()
+{
+  digitalWrite(latchClock, LOW);
+  shiftOut(serialData, shiftClock, LSBFIRST, values[15] );
+  digitalWrite(latchClock, HIGH);
+  Wait();
+}
