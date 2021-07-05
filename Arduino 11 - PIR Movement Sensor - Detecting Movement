@@ -1,0 +1,19 @@
+// Arduino Project # 11 - PIR Movement Sensor - Detecting Movement
+// by mr_noodler
+// Please see license for usage details
+
+int LED = 9;
+int PID = 8;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+  pinMode(PID, INPUT);
+}
+
+void loop() {
+  
+  if (digitalRead(PID))
+    digitalWrite(LED, HIGH);
+  else
+    digitalWrite(LED, LOW);
+}
