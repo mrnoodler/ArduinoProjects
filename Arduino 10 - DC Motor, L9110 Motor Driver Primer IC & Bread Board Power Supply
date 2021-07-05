@@ -1,0 +1,31 @@
+// Arduino 10 - DC Motor, L9110 Motor Driver Primer IC, & Bread Board Power Supply
+// By mr_noodler
+// Please see license for details about usage.
+
+int IA = 9;
+int IB = 8;
+
+int delayTime = 250;
+
+void setup() {
+  pinMode(IA, OUTPUT);
+  pinMode(IB, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(IA, HIGH);
+  digitalWrite(IB, LOW);
+  delay (delayTime);
+
+  digitalWrite(IA, HIGH);
+  digitalWrite(IB, HIGH);
+  delay (delayTime);
+
+  digitalWrite(IA, LOW);
+  digitalWrite(IB, HIGH);
+  delay (delayTime);
+
+  digitalWrite(IA, LOW);
+  digitalWrite(IB, LOW);
+  delay (delayTime);
+}
